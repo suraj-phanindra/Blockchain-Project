@@ -1,1 +1,1 @@
-blockchain-based system to trace the complete supply chain for pharmacy firms, capturing minor details such as manufacturing time, unit location, quality check dates, distribution to hubs, vendors, chemical composition, and history of reported side effects.
+Blockchain-based system to trace the complete supply chain for pharmacy firms, capturing minor details such as manufacturing time, unit location, quality check dates, distribution to hubs, vendors, chemical composition, and history of reported side effects.
