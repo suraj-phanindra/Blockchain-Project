@@ -295,4 +295,55 @@ int main()
             else
                 cout << "Invalid Transaction. Try Again.\n";
         }
-        else if (option == "E" ||
+        else if (option == "E" || option == "e")
+        {
+            int product_id;
+            cout << "Enter Product Id: ";
+            cin >> product_id;
+            print_product_details(productExplorer, product_id);
+        }
+        else if (option == "S" || option == "s")
+        {
+            break;
+        }
+        else
+        {
+            cout << "Please Enter a valid option.\n";
+        }
+
+        if (mempool.size() >= block_max_tcount)
+        {
+            cout << "Adding a new block to Blockchain\n";
+            cout << "Block Proposer is selected randomly\n";
+            cout << "For proposed block, only validation is required\n";
+            cout << "\n";
+
+            Block *b = new Block();
+            while (!mempool.empty())
+            {
+                b->transactions.push_back(mempool.front());
+                mempool.pop();
+            }
+
+            b->number = supplyChain.blockchain.size();
+            b->merkle_root = b->calculate_merkle_root();
+            b->prev_hash = supplyChain.blockchain[b->number - 1]->block_hash;
+            b->block_hash = b->calculate_block_hash();
+
+            supplyChain.blockchain.push_back(b);
+
+            for (auto transaction : b->transactions)
+            {
+                int product_id = transaction->product_id;
+                if (productExplorer.count(product_id))
+                    productExplorer[product_id].push_back(transaction);
+                else
+                    productExplorer[product_id] = {transaction};
+            }
+
+            cout << "Block added successfully!\n\n";
+        }
+    }
+
+    return 0;
+}
